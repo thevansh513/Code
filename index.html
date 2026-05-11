@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>File Downloader</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background-color: #f6f8fa; color: #1f2328; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; border: 1px solid #d0d7de; border-radius: 6px; background: #ffffff; overflow: hidden; }
+        .header { background: #f6f8fa; padding: 16px; font-weight: 600; border-bottom: 1px solid #d0d7de; }
+        .file-list { list-style: none; margin: 0; padding: 0; }
+        .file-item { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid #d0d7de; }
+        .file-item:last-child { border-bottom: none; }
+        .file-item:hover { background-color: #f6f8fa; }
+        .icon { margin-right: 10px; font-size: 18px; }
+        a { color: #0969da; text-decoration: none; font-size: 14px; font-weight: 500; flex-grow: 1; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">Assets (Downloads)</div>
+    <div id="file-container" class="file-list">
+        </div>
+</div>
+
+<script>
+    async function loadFiles() {
+        const response = await fetch('/api/files');
+        const files = await response.json();
+        const container = document.getElementById('file-container');
+        
+        container.innerHTML = files.map(file => `
+            <div class="file-item">
+                <span class="icon">📄</span>
+                <a href="/download/${file}" download>${file}</a>
+            </div>
+        `).join('');
+    }
+
+    // Page load hote hi files dikhao
+    loadFiles();
+</script>
+
+</body>
+</html>
