@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+</head>
+<body>
+
+</b> 
+<div>
+        <input id="i">
+        <button onclick="s()">Check</button>
+        <pre id="d"></pre>
+    </div>
+
+    <script>
+    async function s() {
+        let n = document.getElementById("i").value;
+        let r = await fetch("https://api.apilayer.com/number_verification/validate?number=" + n, {
+            headers: { "apikey": "tV90Qtbq1hlkiBLfVCI5FDCJtxJxY8G5" }
+        });
+        document.getElementById("d").innerText = await r.text();
+    }
+    </script>
+
+</body>
+</html>
